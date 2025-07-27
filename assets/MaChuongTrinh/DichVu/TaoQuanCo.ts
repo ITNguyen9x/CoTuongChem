@@ -5,6 +5,8 @@ import { LOAIQUANCO } from "../Chung/TextChung";
 export class TaoQuanCo{
 
     static daiRongO: number = 64;
+    static dong: number = 10;
+    static cot: number = 9;
     
     static TaoToanQuanCo(tuongXanhMau: Prefab, siXanhMau: Prefab, boXanhMau: Prefab, nguaXanhMau: Prefab, xeXanhMau: Prefab, phaoXanhMau: Prefab, chotXanhMau: Prefab,
         tuongDoMau: Prefab, siDoMau: Prefab, boDoMau: Prefab, nguaDoMau: Prefab, xeDoMau: Prefab, phaoDoMau: Prefab, chotDoMau: Prefab
@@ -60,8 +62,8 @@ export class TaoQuanCo{
     }
 
     static LayViTri(dong: number, cot: number): Vec2 {
-        let x = (dong - 4) * this.daiRongO;
-        let y = (cot - 4) * this.daiRongO;
+        let x = (cot - 4) * this.daiRongO;
+        let y = (dong - 4) * this.daiRongO;
         return new Vec2(x, y);
     }
 }
