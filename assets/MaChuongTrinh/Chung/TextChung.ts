@@ -1,0 +1,17 @@
+export const LOAIQUANCO = {
+    TRONG: '',
+    TUONG_XANH: 'Tướng Xanh',
+    SI_XANH: 'Sĩ Xanh',
+    BO_XANH: 'Bồ Xanh',
+    NGUA_XANH: 'Ngựa Xanh',
+    XE_XANH: 'Xe Xanh',
+    PHAO_XANH: 'Pháo Xanh',
+    CHOT_XANH: 'Chót Xanh',
+    TUONG_DO: 'Tướng Đỏ',
+    SI_DO: 'Sĩ Đỏ',
+    BO_DO: 'Bồ Đỏ',
+    NGUA_DO: 'Ngựa Đỏ',
+    XE_DO: 'Xe Đỏ',
+    PHAO_DO: 'Pháo Đỏ',
+    CHOT_DO: 'Chốt Đỏ',
+}
