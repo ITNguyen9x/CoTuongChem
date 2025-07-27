@@ -44,10 +44,10 @@ export class QuanCoComponent extends Component {
     @property({type: Prefab})
     diChuyenMau: Prefab = null!;
 
-    dong:number = 10;
-    cot:number = 9;
+    hang: number = 10;
+    cot: number = 9;
     daiRongO: number = 64;
-    nuocDi: {dong: number, cot: number}[] = [];
+    nuocDi: { hang: number, cot: number }[] = [];
     tatCaQuanCo: QuanCo[] = [];
 
     start() {
@@ -79,51 +79,55 @@ export class QuanCoComponent extends Component {
     }
 
     lick : boolean = false;
-    TuongDiChuyen(quanCo: QuanCo): {dong: number, cot: number}[] {
+    TuongDiChuyen(quanCo: QuanCo): {hang: number, cot: number}[] {
         this.lick = !this.lick;
         const huongDi = [
-            { dong: 1, cot: 0 },  // Đi lên
-            { dong: -1, cot: 0 }, // Đi xuống
-            { dong: 0, cot: 1 },  // Đi phải
-            { dong: 0, cot: -1 }, // Đi trái
+            { hang: 1, cot: 0 },  // Đi lên
+            { hang: -1, cot: 0 }, // Đi xuống
+            { hang: 0, cot: 1 },  // Đi phải
+            { hang: 0, cot: -1 }, // Đi trái
         ];
-
         const nuocDiHopLe = [];
-
         for (const huong of huongDi) {
-            const cotMoi = quanCo.cot/64 + huong.cot;
-            const dongMoi = quanCo.dong/64 + huong.dong;
-            nuocDiHopLe.push({dong: dongMoi, cot: cotMoi });
-            // Kiểm tra có nằm trong Cung không
-            if (cotMoi >= 3 && cotMoi <= 5) {
-                if (quanCo.phe == Phe.Xanh && dongMoi >= 0 && dongMoi <= 2) {
-                    nuocDiHopLe.push({dong: dongMoi, cot: cotMoi });
-                } else if (quanCo.phe == Phe.Do && dongMoi >= 7 && dongMoi <= 9) {
-                    nuocDiHopLe.push({dong: dongMoi, cot: cotMoi });
-                }
-            }
+            const hangMoi = quanCo.hang + huong.hang;
+            const cotMoi = quanCo.cot + huong.cot;
+            if(this.GoiHanBanCo(hangMoi, cotMoi)) nuocDiHopLe.push({hang: hangMoi, cot: cotMoi });
+            if(this.kiemTraCoQuanBenTrai(quanCo)) console.log("có")
         }
-
         return nuocDiHopLe;
     }
 
-    hienThiNuocDi(dsNuoc: {dong: number, cot: number}[]) {
+    hienThiNuocDi(dsNuoc: {hang: number, cot: number}[]) {
         if(!this.lick){
             this.diChuyen.destroyAllChildren();
             return;
         }
         for (const o of dsNuoc) {
-            const pos = this.layViTri(o.dong, o.cot);
-            const node = instantiate(this.diChuyenMau); // 1 prefab hình vòng tròn đánh dấu
-            node.setPosition(pos.x, pos.y);
+            const pos = this.layViTri(o.hang, o.cot);
+            const node = instantiate(this.diChuyenMau);
+            node.setPosition(pos.x, pos.y - 16);
             node.setParent(this.diChuyen);
         }
     }
 
-    layViTri(dong: number, cot: number): Vec2 {
-        let x = (dong - 4) * this.daiRongO;
-        let y = (cot - 4) * this.daiRongO;
+    layViTri(hang: number, cot: number): Vec2 {
+        let x = (cot - 4) * this.daiRongO;
+        let y = (hang - 4) * this.daiRongO;
         return new Vec2(x, y);
     }
 
+    GoiHanBanCo(hang: number, cot: number){
+        let hangMin: number = 0;
+        let cotMin: number = 0;
+        let hangMax: number = 9;
+        let cotMax: number = 10;
+        if(hang < hangMin || hang > hangMax || cot < cotMin || cot > cotMax) return false;
+        else return true;
+    }
+
+    kiemTraCoQuanBenTrai(quan: QuanCo): boolean {
+        const cotTrai = quan.cot - 1;
+        const hang = quan.hang;
+        return this.tatCaQuanCo.some(q => q.cot === cotTrai && q.hang === hang);
+    }
 }

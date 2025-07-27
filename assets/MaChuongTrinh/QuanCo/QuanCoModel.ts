@@ -20,6 +20,6 @@ export interface QuanCo {
   node: Node;
   ten: string;
   loai: LoaiQuan;
-  dong: number;
+  hang: number;
   cot: number;
 }
