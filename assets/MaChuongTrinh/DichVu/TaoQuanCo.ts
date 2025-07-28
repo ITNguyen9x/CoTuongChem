@@ -10,7 +10,7 @@ export class TaoQuanCo{
         tuongDoMau: Prefab, siDoMau: Prefab, boDoMau: Prefab, nguaDoMau: Prefab, xeDoMau: Prefab, phaoDoMau: Prefab, chotDoMau: Prefab
     ){
         return [
-            this.TaoMotQuanCo({ phe: Phe.Xanh, node:instantiate(tuongXanhMau),  ten: LOAIQUANCO.TUONG_XANH, loai: LoaiQuan.Tuong, hang: 2, cot: 4 }),
+            this.TaoMotQuanCo({ phe: Phe.Xanh, node:instantiate(tuongXanhMau),  ten: LOAIQUANCO.TUONG_XANH, loai: LoaiQuan.Tuong, hang: 0, cot: 4 }),
             this.TaoMotQuanCo({ phe: Phe.Xanh, node:instantiate(siXanhMau),  ten: LOAIQUANCO.SI_XANH, loai: LoaiQuan.Si, hang: 0, cot: 3 }),
             this.TaoMotQuanCo({ phe: Phe.Xanh, node:instantiate(siXanhMau),  ten: LOAIQUANCO.SI_XANH, loai: LoaiQuan.Si, hang: 0, cot: 5 }),
             this.TaoMotQuanCo({ phe: Phe.Xanh, node:instantiate(boXanhMau),  ten: LOAIQUANCO.BO_XANH, loai: LoaiQuan.Bo, hang: 0, cot: 2 }),

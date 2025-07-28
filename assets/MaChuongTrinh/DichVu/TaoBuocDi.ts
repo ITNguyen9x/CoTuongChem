@@ -19,22 +19,22 @@ export class TaoBuocDi{
 
     static TaoBuocDiCuaTuong(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): Node[] {
         let dsNuocDi : Node[] = [];
-        if(this.KiemTraBuocDiBenTren(quanCo, dsQuanCo)){
+        if(quanCo.hang < 2 && this.KiemTraBuocDiBenTren(quanCo, dsQuanCo)){
             quanCo.hang++;
             dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau,));
             quanCo.hang--;
         }
-        if(this.KiemTraBuocDiBenDuoi(quanCo, dsQuanCo)){
+        if(quanCo.hang > 0 && this.KiemTraBuocDiBenDuoi(quanCo, dsQuanCo)){
             quanCo.hang--;
             dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.hang++;
         }
-        if(this.KiemTraBuocDiBenPhai(quanCo, dsQuanCo)){
+        if(quanCo.cot < 5 && this.KiemTraBuocDiBenPhai(quanCo, dsQuanCo)){
             quanCo.cot++;
             dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.cot--;
         }
-        if(this.KiemTraBuocDiBenTrai(quanCo, dsQuanCo)){
+        if(quanCo.cot > 3 && this.KiemTraBuocDiBenTrai(quanCo, dsQuanCo)){
             quanCo.cot--;
             dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.cot++;

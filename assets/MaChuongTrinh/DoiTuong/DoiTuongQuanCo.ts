@@ -9,63 +9,40 @@ export class DoiTuongQuanCo extends Component {
     @property({type: Node})
     QuanCo: Node = null!;
 
-    @property({type: Prefab})
-    tuongXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    siXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    boXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    nguaXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    xeXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    phaoXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    chotXanhMau: Prefab = null!;
-    @property({type: Prefab})
-    tuongDoMau: Prefab = null!;
-    @property({type: Prefab})
-    siDoMau: Prefab = null!;
-    @property({type: Prefab})
-    boDoMau: Prefab = null!;
-    @property({type: Prefab})
-    nguaDoMau: Prefab = null!;
-    @property({type: Prefab})
-    xeDoMau: Prefab = null!;
-    @property({type: Prefab})
-    phaoDoMau: Prefab = null!;
-    @property({type: Prefab})
-    chotDoMau: Prefab = null!;
+    @property({type: Prefab}) tuongXanhMau: Prefab = null!;
+    @property({type: Prefab}) siXanhMau: Prefab = null!;
+    @property({type: Prefab}) boXanhMau: Prefab = null!;
+    @property({type: Prefab}) nguaXanhMau: Prefab = null!;
+    @property({type: Prefab}) xeXanhMau: Prefab = null!;
+    @property({type: Prefab}) phaoXanhMau: Prefab = null!;
+    @property({type: Prefab}) chotXanhMau: Prefab = null!;
+    @property({type: Prefab}) tuongDoMau: Prefab = null!;
+    @property({type: Prefab}) siDoMau: Prefab = null!;
+    @property({type: Prefab}) boDoMau: Prefab = null!;
+    @property({type: Prefab}) nguaDoMau: Prefab = null!;
+    @property({type: Prefab}) xeDoMau: Prefab = null!;
+    @property({type: Prefab}) phaoDoMau: Prefab = null!;
+    @property({type: Prefab}) chotDoMau: Prefab = null!;
 
-    @property({type: Node})
-    NuocDi: Node = null!;
+    @property({type: Node}) NuocDi: Node = null!;
 
-    @property({type: Prefab})
-    diChuyenMau: Prefab = null!;
-
-    hang: number = 10;
-    cot: number = 9;
-    
+    @property({type: Prefab}) diChuyenMau: Prefab = null!;
     
     dsQuanCo: QuanCo[] = [];
     isChonQuan : boolean = false;
     dsNuocDi: Node[] = [];
     quanCoChon: QuanCo;
-    start() {
-        this.TaoTatCaQuanCo();
-        this.ChonQuanCo();
-    }
+
+    start() {  this.TaoTatCaQuanCo(); }
 
     TaoTatCaQuanCo(){
         this.dsQuanCo = TaoQuanCo.TaoToanQuanCo(this.tuongXanhMau, this.siXanhMau, this.boXanhMau, this.nguaXanhMau, this.xeXanhMau, this.phaoXanhMau,
             this.chotXanhMau, this.tuongDoMau, this.siDoMau, this.boDoMau, this.nguaDoMau, this.xeDoMau, this.phaoDoMau, this.chotDoMau);
         this.dsQuanCo.forEach((quanCo: any) => quanCo.node.setParent(this.QuanCo));
+        this.ChonQuanCo();
     }
 
     ChonQuanCo(){ TaoBuocDi.ChonQuanCo(this.dsQuanCo, (quanCo) => this.ChonQuan(quanCo)) }
-
-    ChonNuocCo(){ TaoBuocDi.ChonNuocDi(this.dsNuocDi, (nuocDi) => this.ChonNuocDi(nuocDi)) }
 
     ChonQuan(quanCo: QuanCo) {
         this.isChonQuan = !this.isChonQuan;
@@ -87,15 +64,14 @@ export class DoiTuongQuanCo extends Component {
         }
     }
 
+    ChonNuocCo(){ TaoBuocDi.ChonNuocDi(this.dsNuocDi, (nuocDi) => this.ChonNuocDi(nuocDi)) }
+
     ChonNuocDi(nuocDi: Node, ){
-        // console.log("nuocDi: ", nuocDi.x, "-", nuocDi.y);
-        // console.log("quanCoChon", this.quanCoChon)
         this.DiChuyenTheoAnim(nuocDi);
         this.isChonQuan = !this.isChonQuan;
     }
+
     DiChuyenTheoAnim(nuocDi: Node) {
-        //from: Vec2, to: Vec2
-        // 1. Tính hướng di chuyển
         let dx = nuocDi.x - this.quanCoChon.node.x;
         let dy = nuocDi.y - this.quanCoChon.node.y;
 
@@ -109,20 +85,13 @@ export class DoiTuongQuanCo extends Component {
             if(dy > 0) this.quanCoChon.hang +=1;
             else this.quanCoChon.hang -= 1;
         }
-
-        // 2. Play animation tương ứng
         const anim = this.quanCoChon.node.getComponent(Animation);
-        anim?.play(huong); // Ví dụ: "DiTrai", "DiPhai"
-
-        // 3. Set vị trí bắt đầu
-        //quanCoChon.node.setPosition(quanCoChon.node.x, quanCoChon.node.y);
-        
-
-        // 4. Tween di chuyển đến đích
+        anim?.play(huong);
         tween(this.quanCoChon.node).to(0.4, { position: new Vec3(nuocDi.x, nuocDi.y + 16, 0) }).call(() => { anim?.play("TuongXanh_Doi") }).start();
         this.NuocDi.destroyAllChildren();
         
     }
+    
     daiRongO: number = 64;
     LayViTri(hang: number, cot: number): Vec2 { return new Vec2((cot - 4) * this.daiRongO, (hang - 4) * this.daiRongO); }
 }
