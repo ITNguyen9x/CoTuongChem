@@ -55,7 +55,6 @@ export class DoiTuongQuanCo extends Component {
     start() {
         this.TaoTatCaQuanCo();
         this.ChonQuanCo();
-        this.ChonNuocCo();
     }
 
     TaoTatCaQuanCo(){
@@ -77,39 +76,46 @@ export class DoiTuongQuanCo extends Component {
         }
         switch(quanCo.loai){
             case LoaiQuan.Tuong:
-                this.quanCoChon = quanCo;
-                this.dsNuocDi = TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.dsQuanCo, this.diChuyenMau, this.NuocDi);
-                for(const x of this.dsNuocDi){
-                    console.log("x: ", x.x, "-", x.y)
-                }
+                this.quanCoChon = {...quanCo};
+                this.dsNuocDi = TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.dsQuanCo, this.diChuyenMau);
+                // for(const x of this.dsNuocDi){
+                //     console.log("x: ", x.x, "-", x.y)
+                // }
                 this.dsNuocDi.forEach((nuocDi: Node) =>{ nuocDi.setParent(this.NuocDi)});
                 this.ChonNuocCo();
+                quanCo = {...this.quanCoChon};
+                console.log("quanco", quanCo.node.x, "-", quanCo.node.y)
                 break;
             default:
                 break;
         }
     }
 
-    ChonNuocDi(nuocDi: Node){
+    ChonNuocDi(nuocDi: Node, ){
         // console.log("nuocDi: ", nuocDi.x, "-", nuocDi.y);
         // console.log("quanCoChon", this.quanCoChon)
-        this.DiChuyenTheoAnim(nuocDi, this.quanCoChon);
+        this.DiChuyenTheoAnim(nuocDi);
+        this.isChonQuan = !this.isChonQuan;
     }
-    DiChuyenTheoAnim(nuocDi: Node, quanCoChon : QuanCo) {
+    DiChuyenTheoAnim(nuocDi: Node) {
         //from: Vec2, to: Vec2
         // 1. Tính hướng di chuyển
-        let dx = nuocDi.x - quanCoChon.node.x;
-        let dy = nuocDi.y - quanCoChon.node.y;
+        let dx = nuocDi.x - this.quanCoChon.node.x;
+        let dy = nuocDi.y - this.quanCoChon.node.y;
 
         let huong: string;
         if (Math.abs(dx) > Math.abs(dy)) {
             huong = dx > 0 ? 'TuongXanh_Phai' : 'TuongXanh_Trai';
+            if(dx > 0) this.quanCoChon.cot++;
+            else this.quanCoChon.cot--;
         } else {
             huong = dy > 0 ? 'TuongXanh_Len' : 'TuongXanh_Xuong';
+            if(dy > 0) this.quanCoChon.hang++;
+            else this.quanCoChon.hang--;
         }
 
         // 2. Play animation tương ứng
-        const anim = quanCoChon.node.getComponent(Animation);
+        const anim = this.quanCoChon.node.getComponent(Animation);
         anim?.play(huong); // Ví dụ: "DiTrai", "DiPhai"
 
         // 3. Set vị trí bắt đầu
@@ -117,8 +123,7 @@ export class DoiTuongQuanCo extends Component {
         
 
         // 4. Tween di chuyển đến đích
-        tween(quanCoChon.node).to(0.4, { position: new Vec3(nuocDi.x, nuocDi.y, 0) }).call(() => { anim?.play("TuongXanh_Doi") }).start();
-        this.dsNuocDi = [];
+        tween(this.quanCoChon.node).to(0.4, { position: new Vec3(nuocDi.x, nuocDi.y + 16, 0) }).call(() => { anim?.play("TuongXanh_Doi") }).start();
         this.NuocDi.destroyAllChildren();
         
     }

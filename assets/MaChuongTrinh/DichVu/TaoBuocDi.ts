@@ -17,33 +17,39 @@ export class TaoBuocDi{
     }
 
 
-    static TaoBuocDiCuaTuong(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab, diChuyen: Node): Node[] {
+    static TaoBuocDiCuaTuong(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): Node[] {
         console.log("quanco", quanCo.node.x, "-", quanCo.node.y)
         let dsNuocDi : Node[] = [];
+        for(const x of dsNuocDi){
+            console.log("x: ", x.x, "-", x.y)
+        }
         if(this.KiemTraBuocDiBenTren(quanCo, dsQuanCo)){
             quanCo.hang++;
-            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau, diChuyen));
+            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau,));
             quanCo.hang--;
         }
         if(this.KiemTraBuocDiBenDuoi(quanCo, dsQuanCo)){
             quanCo.hang--;
-            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau, diChuyen));
+            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.hang++;
         }
         if(this.KiemTraBuocDiBenPhai(quanCo, dsQuanCo)){
             quanCo.cot++;
-            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau, diChuyen));
+            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.cot--;
         }
         if(this.KiemTraBuocDiBenTrai(quanCo, dsQuanCo)){
             quanCo.cot--;
-            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau, diChuyen));
+            dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.cot++;
+        }
+        for(const x of dsNuocDi){
+            console.log("x: ", x.x, "-", x.y)
         }
         return dsNuocDi;
     }
 
-    static TaoBuocDi(quanCo: QuanCo, diChuyenMau: Prefab, diChuyen: Node): Node{
+    static TaoBuocDi(quanCo: QuanCo, diChuyenMau: Prefab): Node{
         let vitri = this.LayViTri(quanCo.hang, quanCo.cot);
         let node: Node = instantiate(diChuyenMau);
         node.setPosition(vitri.x, vitri.y - this.soGiaY);
