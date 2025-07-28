@@ -497,23 +497,72 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "dsQuanCo": null,
-    "tuongXanhMau": null,
-    "siXanhMau": null,
-    "boXanhMau": null,
-    "nguaXanhMau": null,
-    "xeXanhMau": null,
-    "phaoXanhMau": null,
-    "chotXanhMau": null,
-    "tuongDoMau": null,
-    "siDoMau": null,
-    "boDoMau": null,
-    "nguaDoMau": null,
-    "xeDoMau": null,
-    "phaoDoMau": null,
-    "chotDoMau": null,
-    "diChuyen": null,
-    "diChuyenMau": null,
+    "QuanCo": {
+      "__id__": 12
+    },
+    "tuongXanhMau": {
+      "__uuid__": "801323d6-837d-4aad-a27b-29975e0234e2",
+      "__expectedType__": "cc.Prefab"
+    },
+    "siXanhMau": {
+      "__uuid__": "a32bd84c-dbda-496e-8189-58cd8cc1dfee",
+      "__expectedType__": "cc.Prefab"
+    },
+    "boXanhMau": {
+      "__uuid__": "a8ab4512-b291-4748-9402-092be5bc60fa",
+      "__expectedType__": "cc.Prefab"
+    },
+    "nguaXanhMau": {
+      "__uuid__": "9a5169cb-fad8-4ba1-84e5-9fc708acb3b4",
+      "__expectedType__": "cc.Prefab"
+    },
+    "xeXanhMau": {
+      "__uuid__": "fff099ec-8ffa-45b3-98f3-c8763aaeea4a",
+      "__expectedType__": "cc.Prefab"
+    },
+    "phaoXanhMau": {
+      "__uuid__": "8a610ca8-2c81-47c0-8250-a4bdbb85f87c",
+      "__expectedType__": "cc.Prefab"
+    },
+    "chotXanhMau": {
+      "__uuid__": "8d74bd65-3dc4-461a-89b7-21d4d4ea622e",
+      "__expectedType__": "cc.Prefab"
+    },
+    "tuongDoMau": {
+      "__uuid__": "e65b3b5e-2ad5-4492-b879-21eace2b8f48",
+      "__expectedType__": "cc.Prefab"
+    },
+    "siDoMau": {
+      "__uuid__": "ca904692-e682-4537-84d4-9e406efe5f2a",
+      "__expectedType__": "cc.Prefab"
+    },
+    "boDoMau": {
+      "__uuid__": "ac3de454-1f54-42f8-bd8d-fa81f3cb1dee",
+      "__expectedType__": "cc.Prefab"
+    },
+    "nguaDoMau": {
+      "__uuid__": "de2ea044-7f98-4168-8af1-01243b3301b2",
+      "__expectedType__": "cc.Prefab"
+    },
+    "xeDoMau": {
+      "__uuid__": "3c236f52-c89c-4f77-ac5e-b205d49a0f01",
+      "__expectedType__": "cc.Prefab"
+    },
+    "phaoDoMau": {
+      "__uuid__": "0fe8bf15-e980-41dc-8ec0-d97963a5dbfb",
+      "__expectedType__": "cc.Prefab"
+    },
+    "chotDoMau": {
+      "__uuid__": "192c808d-5e6c-4dfb-8abe-43a2b5799d9b",
+      "__expectedType__": "cc.Prefab"
+    },
+    "NuocDi": {
+      "__id__": 14
+    },
+    "diChuyenMau": {
+      "__uuid__": "d55fbee0-3071-44b7-ad8e-fb96e928e23e",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": "10A5QWlMJDPaLuHP/8cUdd"
   },
   {

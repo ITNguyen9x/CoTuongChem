@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Prefab } from 'cc';
+import { _decorator, Component, Node, Prefab, Vec2, Animation, tween, Vec3 } from 'cc';
 import { LoaiQuan, QuanCo } from '../MoHinh/MoHinhQuanCo';
 import { TaoQuanCo, } from '../DichVu/TaoQuanCo';
 import { TaoBuocDi, } from '../DichVu/TaoBuocDi';
@@ -51,6 +51,7 @@ export class DoiTuongQuanCo extends Component {
     dsQuanCo: QuanCo[] = [];
     isChonQuan : boolean = false;
     dsNuocDi: Node[] = [];
+    quanCoChon: QuanCo;
     start() {
         this.TaoTatCaQuanCo();
         this.ChonQuanCo();
@@ -76,7 +77,12 @@ export class DoiTuongQuanCo extends Component {
         }
         switch(quanCo.loai){
             case LoaiQuan.Tuong:
-                TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.dsQuanCo, this.diChuyenMau, this.NuocDi).forEach((nuocDi: Node) =>{ nuocDi.setParent(this.NuocDi)});
+                this.quanCoChon = quanCo;
+                this.dsNuocDi = TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.dsQuanCo, this.diChuyenMau, this.NuocDi);
+                for(const x of this.dsNuocDi){
+                    console.log("x: ", x.x, "-", x.y)
+                }
+                this.dsNuocDi.forEach((nuocDi: Node) =>{ nuocDi.setParent(this.NuocDi)});
                 this.ChonNuocCo();
                 break;
             default:
@@ -85,7 +91,37 @@ export class DoiTuongQuanCo extends Component {
     }
 
     ChonNuocDi(nuocDi: Node){
-        console.log("nuocDi", nuocDi)
+        // console.log("nuocDi: ", nuocDi.x, "-", nuocDi.y);
+        // console.log("quanCoChon", this.quanCoChon)
+        this.DiChuyenTheoAnim(nuocDi, this.quanCoChon);
+    }
+    DiChuyenTheoAnim(nuocDi: Node, quanCoChon : QuanCo) {
+        //from: Vec2, to: Vec2
+        // 1. Tính hướng di chuyển
+        let dx = nuocDi.x - quanCoChon.node.x;
+        let dy = nuocDi.y - quanCoChon.node.y;
 
-    } 
+        let huong: string;
+        if (Math.abs(dx) > Math.abs(dy)) {
+            huong = dx > 0 ? 'TuongXanh_Phai' : 'TuongXanh_Trai';
+        } else {
+            huong = dy > 0 ? 'TuongXanh_Len' : 'TuongXanh_Xuong';
+        }
+
+        // 2. Play animation tương ứng
+        const anim = quanCoChon.node.getComponent(Animation);
+        anim?.play(huong); // Ví dụ: "DiTrai", "DiPhai"
+
+        // 3. Set vị trí bắt đầu
+        //quanCoChon.node.setPosition(quanCoChon.node.x, quanCoChon.node.y);
+        
+
+        // 4. Tween di chuyển đến đích
+        tween(quanCoChon.node).to(0.4, { position: new Vec3(nuocDi.x, nuocDi.y, 0) }).call(() => { anim?.play("TuongXanh_Doi") }).start();
+        this.dsNuocDi = [];
+        this.NuocDi.destroyAllChildren();
+        
+    }
+    daiRongO: number = 64;
+    LayViTri(hang: number, cot: number): Vec2 { return new Vec2((cot - 4) * this.daiRongO, (hang - 4) * this.daiRongO); }
 }

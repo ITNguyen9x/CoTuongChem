@@ -35,8 +35,8 @@
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": -62.224,
+      "y": -133.866,
       "z": 0
     },
     "_lrot": {
@@ -153,11 +153,23 @@
     "playOnLoad": true,
     "_clips": [
       {
-        "__uuid__": "33edb52a-e15c-457c-8712-93f768f607a1",
+        "__uuid__": "0d9e5f10-4318-4ca2-b624-c424aefa716c",
         "__expectedType__": "cc.AnimationClip"
       },
       {
-        "__uuid__": "0d9e5f10-4318-4ca2-b624-c424aefa716c",
+        "__uuid__": "f0a3bcb8-8f9e-44ef-97e9-80c9f808127d",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "98bc09ab-c009-4e12-a2dc-092a868f8c82",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "8fdbd588-c61c-4b07-831b-53316eb5bfd5",
+        "__expectedType__": "cc.AnimationClip"
+      },
+      {
+        "__uuid__": "e5e06cd2-e268-4d43-b8e0-8275927bfcec",
         "__expectedType__": "cc.AnimationClip"
       }
     ],

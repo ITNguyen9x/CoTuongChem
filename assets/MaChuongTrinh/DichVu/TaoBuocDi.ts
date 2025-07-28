@@ -18,6 +18,7 @@ export class TaoBuocDi{
 
 
     static TaoBuocDiCuaTuong(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab, diChuyen: Node): Node[] {
+        console.log("quanco", quanCo.node.x, "-", quanCo.node.y)
         let dsNuocDi : Node[] = [];
         if(this.KiemTraBuocDiBenTren(quanCo, dsQuanCo)){
             quanCo.hang++;
