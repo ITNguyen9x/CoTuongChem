@@ -1,5 +1,5 @@
 import { instantiate, Prefab, Vec2 } from "cc";
-import { LoaiQuan, Phe, QuanCo } from "../QuanCo/QuanCoModel";
+import { LoaiQuan, Phe, QuanCo } from "../MoHinh/MoHinhQuanCo";
 import { LOAIQUANCO } from "../Chung/TextChung";
 
 export class TaoQuanCo{

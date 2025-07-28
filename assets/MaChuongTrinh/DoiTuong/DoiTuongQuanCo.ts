@@ -1,13 +1,13 @@
-import { _decorator, Component, instantiate, Node, Prefab, Vec2 } from 'cc';
-import { Phe, LoaiQuan, QuanCo, NuocDi } from './QuanCoModel';
+import { _decorator, Component, Node, Prefab } from 'cc';
+import { LoaiQuan, QuanCo } from '../MoHinh/MoHinhQuanCo';
 import { TaoQuanCo, } from '../DichVu/TaoQuanCo';
 import { TaoBuocDi, } from '../DichVu/TaoBuocDi';
 const { ccclass, property } = _decorator;
 
-@ccclass('QuanCoComponent')
-export class QuanCoComponent extends Component {
+@ccclass('DoiTuongQuanCo')
+export class DoiTuongQuanCo extends Component {
     @property({type: Node})
-    quanCo: Node = null!;
+    QuanCo: Node = null!;
 
     @property({type: Prefab})
     tuongXanhMau: Prefab = null!;
@@ -39,7 +39,7 @@ export class QuanCoComponent extends Component {
     chotDoMau: Prefab = null!;
 
     @property({type: Node})
-    diChuyen: Node = null!;
+    NuocDi: Node = null!;
 
     @property({type: Prefab})
     diChuyenMau: Prefab = null!;
@@ -48,8 +48,7 @@ export class QuanCoComponent extends Component {
     cot: number = 9;
     
     
-    nuocDi: { hang: number, cot: number }[] = [];
-    tatCaQuanCo: QuanCo[] = [];
+    dsQuanCo: QuanCo[] = [];
     isChonQuan : boolean = false;
     dsNuocDi: Node[] = [];
     start() {
@@ -59,25 +58,25 @@ export class QuanCoComponent extends Component {
     }
 
     TaoTatCaQuanCo(){
-        this.tatCaQuanCo = TaoQuanCo.TaoToanQuanCo(this.tuongXanhMau, this.siXanhMau, this.boXanhMau, this.nguaXanhMau, this.xeXanhMau, this.phaoXanhMau,
+        this.dsQuanCo = TaoQuanCo.TaoToanQuanCo(this.tuongXanhMau, this.siXanhMau, this.boXanhMau, this.nguaXanhMau, this.xeXanhMau, this.phaoXanhMau,
             this.chotXanhMau, this.tuongDoMau, this.siDoMau, this.boDoMau, this.nguaDoMau, this.xeDoMau, this.phaoDoMau, this.chotDoMau);
-        this.tatCaQuanCo.forEach((quanCo: any) => quanCo.node.setParent(this.quanCo));
+        this.dsQuanCo.forEach((quanCo: any) => quanCo.node.setParent(this.QuanCo));
     }
 
-    ChonQuanCo(){ TaoBuocDi.ChonQuanCo(this.tatCaQuanCo, (quanCo) => this.ChonQuan(quanCo)) }
+    ChonQuanCo(){ TaoBuocDi.ChonQuanCo(this.dsQuanCo, (quanCo) => this.ChonQuan(quanCo)) }
 
     ChonNuocCo(){ TaoBuocDi.ChonNuocDi(this.dsNuocDi, (nuocDi) => this.ChonNuocDi(nuocDi)) }
 
     ChonQuan(quanCo: QuanCo) {
         this.isChonQuan = !this.isChonQuan;
         if(!this.isChonQuan){
-            this.diChuyen.destroyAllChildren();
+            this.NuocDi.destroyAllChildren();
             this.dsNuocDi = [];
             return;
         }
         switch(quanCo.loai){
             case LoaiQuan.Tuong:
-                TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.tatCaQuanCo, this.diChuyenMau, this.diChuyen).forEach((nuocDi: Node) =>{ nuocDi.setParent(this.diChuyen)});
+                TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.dsQuanCo, this.diChuyenMau, this.NuocDi).forEach((nuocDi: Node) =>{ nuocDi.setParent(this.NuocDi)});
                 this.ChonNuocCo();
                 break;
             default:
@@ -88,14 +87,5 @@ export class QuanCoComponent extends Component {
     ChonNuocDi(nuocDi: Node){
         console.log("nuocDi", nuocDi)
 
-    }
-
-    
-
-    
-    
-
-    
-
-    
+    } 
 }

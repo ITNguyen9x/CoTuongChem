@@ -1,5 +1,5 @@
 import { EventTouch, instantiate, Node, Prefab, Vec2 } from "cc";
-import { NuocDi, QuanCo } from "../QuanCo/QuanCoModel";
+import { QuanCo } from "../MoHinh/MoHinhQuanCo";
 
 export class TaoBuocDi{
 
