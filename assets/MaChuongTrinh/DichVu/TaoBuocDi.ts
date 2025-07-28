@@ -18,11 +18,7 @@ export class TaoBuocDi{
 
 
     static TaoBuocDiCuaTuong(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): Node[] {
-        console.log("quanco", quanCo.node.x, "-", quanCo.node.y)
         let dsNuocDi : Node[] = [];
-        for(const x of dsNuocDi){
-            console.log("x: ", x.x, "-", x.y)
-        }
         if(this.KiemTraBuocDiBenTren(quanCo, dsQuanCo)){
             quanCo.hang++;
             dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau,));
@@ -42,9 +38,6 @@ export class TaoBuocDi{
             quanCo.cot--;
             dsNuocDi.push(this.TaoBuocDi(quanCo, diChuyenMau));
             quanCo.cot++;
-        }
-        for(const x of dsNuocDi){
-            console.log("x: ", x.x, "-", x.y)
         }
         return dsNuocDi;
     }

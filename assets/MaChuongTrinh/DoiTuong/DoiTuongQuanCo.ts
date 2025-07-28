@@ -76,15 +76,11 @@ export class DoiTuongQuanCo extends Component {
         }
         switch(quanCo.loai){
             case LoaiQuan.Tuong:
-                this.quanCoChon = {...quanCo};
+                this.quanCoChon = quanCo;
                 this.dsNuocDi = TaoBuocDi.TaoBuocDiCuaTuong(quanCo, this.dsQuanCo, this.diChuyenMau);
-                // for(const x of this.dsNuocDi){
-                //     console.log("x: ", x.x, "-", x.y)
-                // }
                 this.dsNuocDi.forEach((nuocDi: Node) =>{ nuocDi.setParent(this.NuocDi)});
                 this.ChonNuocCo();
-                quanCo = {...this.quanCoChon};
-                console.log("quanco", quanCo.node.x, "-", quanCo.node.y)
+                quanCo = this.quanCoChon;
                 break;
             default:
                 break;
@@ -106,12 +102,12 @@ export class DoiTuongQuanCo extends Component {
         let huong: string;
         if (Math.abs(dx) > Math.abs(dy)) {
             huong = dx > 0 ? 'TuongXanh_Phai' : 'TuongXanh_Trai';
-            if(dx > 0) this.quanCoChon.cot++;
-            else this.quanCoChon.cot--;
+            if(dx > 0) this.quanCoChon.cot += 1;
+            else this.quanCoChon.cot-=1;
         } else {
             huong = dy > 0 ? 'TuongXanh_Len' : 'TuongXanh_Xuong';
-            if(dy > 0) this.quanCoChon.hang++;
-            else this.quanCoChon.hang--;
+            if(dy > 0) this.quanCoChon.hang +=1;
+            else this.quanCoChon.hang -= 1;
         }
 
         // 2. Play animation tương ứng
