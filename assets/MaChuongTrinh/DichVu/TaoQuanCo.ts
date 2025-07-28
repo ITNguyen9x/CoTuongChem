@@ -5,8 +5,6 @@ import { LOAIQUANCO } from "../Chung/TextChung";
 export class TaoQuanCo{
 
     static daiRongO: number = 64;
-    static hang: number = 10;
-    static cot: number = 9;
     
     static TaoToanQuanCo(tuongXanhMau: Prefab, siXanhMau: Prefab, boXanhMau: Prefab, nguaXanhMau: Prefab, xeXanhMau: Prefab, phaoXanhMau: Prefab, chotXanhMau: Prefab,
         tuongDoMau: Prefab, siDoMau: Prefab, boDoMau: Prefab, nguaDoMau: Prefab, xeDoMau: Prefab, phaoDoMau: Prefab, chotDoMau: Prefab
@@ -49,8 +47,8 @@ export class TaoQuanCo{
     }
 
     static TaoMotQuanCo(quanCo: QuanCo){
-        let pos = this.LayViTri(quanCo.hang, quanCo.cot);
-        quanCo.node.setPosition(pos.x, pos.y);
+        let vitri = this.LayViTri(quanCo.hang, quanCo.cot);
+        quanCo.node.setPosition(vitri.x, vitri.y);
         return quanCo;
     }
 

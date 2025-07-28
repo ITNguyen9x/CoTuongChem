@@ -23,3 +23,9 @@ export interface QuanCo {
   hang: number;
   cot: number;
 }
+
+export interface NuocDi {
+  node: Node;
+  hang: number;
+  cot: number;
+}

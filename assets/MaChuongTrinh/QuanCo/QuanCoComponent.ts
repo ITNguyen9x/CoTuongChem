@@ -1,5 +1,5 @@
 import { _decorator, Component, instantiate, Node, Prefab, Vec2 } from 'cc';
-import { Phe, LoaiQuan, QuanCo } from './QuanCoModel';
+import { Phe, LoaiQuan, QuanCo, NuocDi } from './QuanCoModel';
 import { TaoQuanCo, } from '../DichVu/TaoQuanCo';
 import { DiChuyenQuanCo, } from '../DichVu/DiChuyenQuanCo';
 const { ccclass, property } = _decorator;
@@ -49,7 +49,8 @@ export class QuanCoComponent extends Component {
     daiRongO: number = 64;
     nuocDi: { hang: number, cot: number }[] = [];
     tatCaQuanCo: QuanCo[] = [];
-
+    isChonQuan : boolean = false;
+    dsNuocDi: any[] = [];
     start() {
         this.TaoTatCaQuanCo();
         this.ChonQuanCo();
@@ -62,72 +63,78 @@ export class QuanCoComponent extends Component {
         this.tatCaQuanCo.forEach((x: any) => x.node.setParent(this.quanCo));
     }
 
-    ChonQuanCo(){
-       DiChuyenQuanCo.ChonNhieuQuanCo(this.tatCaQuanCo, (quanCo) => {
-            this.ChonQuan(quanCo);
-       });
-    }
+    ChonQuanCo(){ DiChuyenQuanCo.ChonNhieuQuanCo(this.tatCaQuanCo, (quanCo) => this.ChonQuan(quanCo)); }
+
+    //ChonNuocCo(){ DiChuyenQuanCo.ChonNhieuNuocDi(this.dsNuocDi, (nuocDi) => this.ChonNuocDi(nuocDi)); }
 
     ChonQuan(quanCo: QuanCo) {
+        this.isChonQuan = !this.isChonQuan;
+        if(!this.isChonQuan){ this.diChuyen.destroyAllChildren(); return; }
         switch(quanCo.loai){
             case LoaiQuan.Tuong:
-                this.hienThiNuocDi(this.TuongDiChuyen(quanCo));
+                this.HienThiNuocDi(this.dsNuocDi = this.KiemTraBuocDiCuaTuong(quanCo));
                 break;
             default:
                 break;
         }
     }
 
-    lick : boolean = false;
-    TuongDiChuyen(quanCo: QuanCo): {hang: number, cot: number}[] {
-        this.lick = !this.lick;
-        const huongDi = [
-            { hang: 1, cot: 0 },  // Đi lên
-            { hang: -1, cot: 0 }, // Đi xuống
-            { hang: 0, cot: 1 },  // Đi phải
-            { hang: 0, cot: -1 }, // Đi trái
-        ];
-        const nuocDiHopLe = [];
-        for (const huong of huongDi) {
-            const hangMoi = quanCo.hang + huong.hang;
-            const cotMoi = quanCo.cot + huong.cot;
-            if(this.GoiHanBanCo(hangMoi, cotMoi)) nuocDiHopLe.push({hang: hangMoi, cot: cotMoi });
-            if(this.kiemTraCoQuanBenTrai(quanCo)) console.log("có")
+    HienThiNuocDi(dsNuocDi: {hang: number, cot: number}[]) {
+        for (const nuocdi of dsNuocDi) {
+            const vitri = this.LayViTri(nuocdi.hang, nuocdi.cot);
+            const oDiChuyen = instantiate(this.diChuyenMau);
+            oDiChuyen.setPosition(vitri.x, vitri.y - 16);
+            oDiChuyen.setParent(this.diChuyen);
         }
+    }
+
+    KiemTraBuocDiCuaTuong(quanCo: QuanCo): {hang: number, cot: number}[] {
+        const nuocDiHopLe= [];
+        if(this.kiemTraQuanCoBenTren(quanCo)) nuocDiHopLe.push({hang: quanCo.hang + 1, cot: quanCo.cot });
+        if(this.kiemTraQuanCoBenDuoi(quanCo)) nuocDiHopLe.push({hang: quanCo.hang - 1, cot: quanCo.cot });
+        if(this.kiemTraQuanCoBenTrai(quanCo)) nuocDiHopLe.push({hang: quanCo.hang, cot: quanCo.cot - 1 });
+        if(this.kiemTraQuanCoBenPhai(quanCo)) nuocDiHopLe.push({hang: quanCo.hang, cot: quanCo.cot + 1 });
         return nuocDiHopLe;
     }
 
-    hienThiNuocDi(dsNuoc: {hang: number, cot: number}[]) {
-        if(!this.lick){
-            this.diChuyen.destroyAllChildren();
-            return;
-        }
-        for (const o of dsNuoc) {
-            const pos = this.layViTri(o.hang, o.cot);
-            const node = instantiate(this.diChuyenMau);
-            node.setPosition(pos.x, pos.y - 16);
-            node.setParent(this.diChuyen);
-        }
-    }
+    // ChonNuocDi(nuocDi: NuocDi){
+    //     if(this.dsNuocDi.length > 0)
+    // }
 
-    layViTri(hang: number, cot: number): Vec2 {
+    
+
+    LayViTri(hang: number, cot: number): Vec2 {
         let x = (cot - 4) * this.daiRongO;
         let y = (hang - 4) * this.daiRongO;
         return new Vec2(x, y);
     }
 
-    GoiHanBanCo(hang: number, cot: number){
+    GoiHanBanCo(hang: number, cot: number): boolean{
         let hangMin: number = 0;
         let cotMin: number = 0;
         let hangMax: number = 9;
         let cotMax: number = 10;
-        if(hang < hangMin || hang > hangMax || cot < cotMin || cot > cotMax) return false;
-        else return true;
+        if(hang < hangMin || hang > hangMax || cot < cotMin || cot > cotMax) return true;
+        else return false;
     }
 
-    kiemTraCoQuanBenTrai(quan: QuanCo): boolean {
-        const cotTrai = quan.cot - 1;
-        const hang = quan.hang;
-        return this.tatCaQuanCo.some(q => q.cot === cotTrai && q.hang === hang);
+    kiemTraQuanCoBenTrai(quanCo: QuanCo): boolean {
+        if(this.GoiHanBanCo(quanCo.hang, quanCo.cot - 1)) return false;
+        return !this.tatCaQuanCo.some(q => q.cot == quanCo.cot - 1 && q.hang === quanCo.hang && q.phe == quanCo.phe);
+    }
+
+    kiemTraQuanCoBenPhai(quanCo: QuanCo): boolean {
+        if(this.GoiHanBanCo(quanCo.hang, quanCo.cot + 1)) return false;
+        return !this.tatCaQuanCo.some(q => q.cot == quanCo.cot + 1 && q.hang === quanCo.hang && q.phe == quanCo.phe);
+    }
+
+    kiemTraQuanCoBenTren(quanCo: QuanCo): boolean {
+        if(this.GoiHanBanCo(quanCo.hang + 1, quanCo.cot)) return false;
+        return !this.tatCaQuanCo.some(q => q.cot == quanCo.cot && q.hang === quanCo.hang + 1 && q.phe == quanCo.phe);
+    }
+
+    kiemTraQuanCoBenDuoi(quanCo: QuanCo): boolean {
+        if(this.GoiHanBanCo(quanCo.hang - 1, quanCo.cot)) return false;
+        return !this.tatCaQuanCo.some(q => q.cot == quanCo.cot && q.hang === quanCo.hang - 1 && q.phe == quanCo.phe);
     }
 }
