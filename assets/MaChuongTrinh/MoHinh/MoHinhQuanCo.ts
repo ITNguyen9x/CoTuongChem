@@ -15,11 +15,24 @@ export enum LoaiQuan{
     Chot = 7
 }
 
+export enum ViTri{
+    Trong = 0,
+    GioiHanBien = 1,
+    PheTa = 2,
+    PheDich = 3
+}
+
 export interface QuanCo {
   phe: Phe;
   node: Node;
   ten: string;
   loai: LoaiQuan;
+  hang: number;
+  cot: number;
+}
+
+export interface NuocDi {
+  node: Node;
   hang: number;
   cot: number;
 }
