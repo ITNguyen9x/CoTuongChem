@@ -93,7 +93,7 @@ export class DoiTuongQuanCo extends Component {
                 break;
             case LoaiQuan.Phao:
                 this.quanCoChon = quanCo;
-                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaXe(quanCo, this.dsQuanCo, this.diChuyenMau);
+                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaPhao(quanCo, this.dsQuanCo, this.diChuyenMau);
                 this.dsNuocDi.forEach((nuocDi: NuocDi) =>{ nuocDi.node.setParent(this.NuocDi)});
                 this.ChonNuocCo();
                 quanCo = this.quanCoChon;
