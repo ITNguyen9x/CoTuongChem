@@ -70,9 +70,31 @@ export class DoiTuongQuanCo extends Component {
                 break;
             case LoaiQuan.Ngua:
                 this.quanCoChon = quanCo;
-                console.log("quanco0", quanCo.hang);
-                //this.dsNuocDi = TaoBuocDi.checkQuanCo(quanCo);
-                console.log("quanco1: ", quanCo.hang);
+                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaNgua(quanCo, this.dsQuanCo, this.diChuyenMau);
+                this.dsNuocDi.forEach((nuocDi: NuocDi) =>{ nuocDi.node.setParent(this.NuocDi)});
+                this.ChonNuocCo();
+                quanCo = this.quanCoChon;
+                break;
+            case LoaiQuan.Bo:
+                this.quanCoChon = quanCo;
+                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaBo(quanCo, this.dsQuanCo, this.diChuyenMau);
+                this.dsNuocDi.forEach((nuocDi: NuocDi) =>{ nuocDi.node.setParent(this.NuocDi)});
+                this.ChonNuocCo();
+                quanCo = this.quanCoChon;
+                break;
+            case LoaiQuan.Si:
+                this.quanCoChon = quanCo;
+                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaSi(quanCo, this.dsQuanCo, this.diChuyenMau);
+                this.dsNuocDi.forEach((nuocDi: NuocDi) =>{ nuocDi.node.setParent(this.NuocDi)});
+                this.ChonNuocCo();
+                quanCo = this.quanCoChon;
+                break;
+            case LoaiQuan.Phao:
+                this.quanCoChon = quanCo;
+                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaXe(quanCo, this.dsQuanCo, this.diChuyenMau);
+                this.dsNuocDi.forEach((nuocDi: NuocDi) =>{ nuocDi.node.setParent(this.NuocDi)});
+                this.ChonNuocCo();
+                quanCo = this.quanCoChon;
                 break;
             default:
                 break;
@@ -88,22 +110,12 @@ export class DoiTuongQuanCo extends Component {
 
     DiChuyenTheoAnim(nuocDi: NuocDi) {
         let huongDi: string = 'TuongXanh_Xuong';
-        if(nuocDi.cot> this.quanCoChon.cot){
-            huongDi = 'TuongXanh_Phai';
-            this.quanCoChon.cot = nuocDi.cot;
-        }
-        else if(nuocDi.cot < this.quanCoChon.cot){
-            huongDi = 'TuongXanh_Trai';
-            this.quanCoChon.cot = nuocDi.cot;
-        }
-        else if(nuocDi.hang > this.quanCoChon.hang){
-            huongDi = 'TuongXanh_Len';
-            this.quanCoChon.hang  = nuocDi.hang;
-        }
-        else if(nuocDi.hang < this.quanCoChon.hang){
-            huongDi = 'TuongXanh_Xuong';
-            this.quanCoChon.hang = nuocDi.hang;
-        }
+         this.quanCoChon.hang  = nuocDi.hang;
+        this.quanCoChon.cot = nuocDi.cot;
+        if(nuocDi.cot> this.quanCoChon.cot) huongDi = 'TuongXanh_Phai'
+        else if(nuocDi.cot < this.quanCoChon.cot) huongDi = 'TuongXanh_Trai';
+        else if(nuocDi.hang > this.quanCoChon.hang) huongDi = 'TuongXanh_Len';
+        else if(nuocDi.hang < this.quanCoChon.hang) huongDi = 'TuongXanh_Xuong';
         const anim = this.quanCoChon.node.getComponent(Animation);
         anim?.play(huongDi);
         tween(this.quanCoChon.node).to(0.4, { position: new Vec3(nuocDi.node.x, nuocDi.node.y + 16, 0) }).call(() => { anim?.play("TuongXanh_Doi") }).start();

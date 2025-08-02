@@ -1,8 +1,12 @@
 import { Node } from 'cc';
 
 export enum Phe{
-    Xanh = 1,
-    Do = 2
+    Xanh = 0,
+    Do = 1
+}
+export enum ViTri{
+    Tren = 0,
+    Duoi = 1
 }
 export enum LoaiQuan{
     Trong = 0,
@@ -23,6 +27,7 @@ export enum ViTri{
 }
 
 export interface QuanCo {
+  vitri: ViTri,
   phe: Phe;
   node: Node;
   ten: string;
