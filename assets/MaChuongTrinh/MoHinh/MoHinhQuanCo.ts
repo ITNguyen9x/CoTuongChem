@@ -4,10 +4,12 @@ export enum Phe{
     Xanh = 0,
     Do = 1
 }
+
 export enum ViTri{
     Tren = 0,
     Duoi = 1
 }
+
 export enum LoaiQuan{
     Trong = 0,
     Tuong = 1,
@@ -42,4 +44,5 @@ export interface NuocDi {
   node: Node;
   hang: number;
   cot: number;
+  loai: ViTri;
 }
