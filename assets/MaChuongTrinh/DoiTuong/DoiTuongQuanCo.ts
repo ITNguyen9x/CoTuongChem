@@ -96,6 +96,13 @@ export class DoiTuongQuanCo extends Component {
                 this.ChonNuocCo();
                 quanCo = this.quanCoChon;
                 break;
+            case LoaiQuan.Chot:
+                this.quanCoChon = quanCo;
+                this.dsNuocDi = TaoBuocDi.TaoNuocDiCuaChot(quanCo, this.dsQuanCo, this.diChuyenMau);
+                this.dsNuocDi.forEach((nuocDi: NuocDi) =>{ nuocDi.node.setParent(this.NuocDi)});
+                this.ChonNuocCo();
+                quanCo = this.quanCoChon;
+                break;
             default:
                 break;
         }

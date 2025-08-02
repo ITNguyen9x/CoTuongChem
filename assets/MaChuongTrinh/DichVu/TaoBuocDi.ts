@@ -136,6 +136,30 @@ export class TaoBuocDi{
         return dsNuocDi;
     }
 
+    static TaoNuocDiCuaChot(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): NuocDi[]{
+        let dsNuocDi: NuocDi[] = [];
+        if(quanCo.vitri == ViTri.Duoi){
+            let kiemTraBenTren = this.KiemTraOHienTai(quanCo.hang + 1, quanCo.cot, quanCo.phe, dsQuanCo);
+            if(kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot, diChuyenMau));
+            if(quanCo.hang > 4){
+                let kiemTraBenPhai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot + 1, quanCo.phe, dsQuanCo);
+                if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, diChuyenMau));
+                let kiemTraBenTrai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot - 1, quanCo.phe, dsQuanCo);
+                if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot - 1, diChuyenMau));
+            }
+        }else{
+            let kiemTraBenDuoi = this.KiemTraOHienTai(quanCo.hang - 1, quanCo.cot, quanCo.phe, dsQuanCo);
+            if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot, diChuyenMau));
+            if(quanCo.hang < 5){
+                let kiemTraBenPhai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot + 1, quanCo.phe, dsQuanCo);
+                if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, diChuyenMau));
+                let kiemTraBenTrai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot - 1, quanCo.phe, dsQuanCo);
+                if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot -1, diChuyenMau));
+            }
+        }
+        return dsNuocDi;
+    }
+
     static TaoBuocDi(hang: number, cot: number, diChuyenMau: Prefab): NuocDi{
         let vitri = HamChung.LayViTri(hang, cot);
         let nuocDi: NuocDi = {hang: hang, cot: cot, node: instantiate(diChuyenMau)};

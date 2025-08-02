@@ -20,11 +20,11 @@ export class TaoQuanCo{
             this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(xeXanhMau),  ten: TENQUANCO.XE_PHAI, loai: LoaiQuan.Xe, hang: 0, cot: 8 }),
             this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(phaoXanhMau),  ten: TENQUANCO.PHAO_TRAI, loai: LoaiQuan.Phao, hang: 2, cot: 1 }),
             this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(phaoXanhMau),  ten: TENQUANCO.PHAO_PHAI, loai: LoaiQuan.Phao, hang: 2, cot: 7 }),
-            // this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_MOT, loai: LoaiQuan.Chot, hang: 3, cot: 0 }),
-            // this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_HAI, loai: LoaiQuan.Chot, hang: 3, cot: 2 }),
-            // this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_BA, loai: LoaiQuan.Chot, hang: 3, cot: 4 }),
-            // this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_BON, loai: LoaiQuan.Chot, hang: 3, cot: 6 }),
-            // this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_NAM, loai: LoaiQuan.Chot, hang: 3, cot: 8 }),
+            this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_MOT, loai: LoaiQuan.Chot, hang: 3, cot: 0 }),
+            this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_HAI, loai: LoaiQuan.Chot, hang: 3, cot: 2 }),
+            this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_BA, loai: LoaiQuan.Chot, hang: 3, cot: 4 }),
+            this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_BON, loai: LoaiQuan.Chot, hang: 3, cot: 6 }),
+            this.TaoMotQuanCo({vitri: ViTri.Duoi, phe: Phe.Xanh, node:instantiate(chotXanhMau),  ten: TENQUANCO.CHOT_NAM, loai: LoaiQuan.Chot, hang: 3, cot: 8 }),
 
             this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(tuongDoMau),  ten: TENQUANCO.TUONG, loai: LoaiQuan.Tuong, hang: 9, cot: 4 }),
             this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(siDoMau),  ten: TENQUANCO.SI_TRAI, loai: LoaiQuan.Si, hang: 9, cot: 3 }),
@@ -37,11 +37,11 @@ export class TaoQuanCo{
             this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(xeDoMau),  ten: TENQUANCO.XE_PHAI, loai: LoaiQuan.Xe, hang: 9, cot: 8 }),
             this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(phaoDoMau),  ten: TENQUANCO.PHAO_TRAI, loai: LoaiQuan.Phao, hang: 7, cot: 1 }),
             this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(phaoDoMau),  ten: TENQUANCO.PHAO_PHAI, loai: LoaiQuan.Phao, hang: 7, cot: 7 }),
-            // this.TaoMotQuanCo({ phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_MOT, loai: LoaiQuan.Chot, hang: 6, cot: 0 }),
-            // this.TaoMotQuanCo({ phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_HAI, loai: LoaiQuan.Chot, hang: 6, cot: 2 }),
-            // this.TaoMotQuanCo({ phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_BA, loai: LoaiQuan.Chot, hang: 6, cot: 4 }),
-            // this.TaoMotQuanCo({ phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_BON, loai: LoaiQuan.Chot, hang: 6, cot: 6 }),
-            // this.TaoMotQuanCo({ phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_NAM, loai: LoaiQuan.Chot, hang: 6, cot: 8 }),
+            this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_MOT, loai: LoaiQuan.Chot, hang: 6, cot: 0 }),
+            this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_HAI, loai: LoaiQuan.Chot, hang: 6, cot: 2 }),
+            this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_BA, loai: LoaiQuan.Chot, hang: 6, cot: 4 }),
+            this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_BON, loai: LoaiQuan.Chot, hang: 6, cot: 6 }),
+            this.TaoMotQuanCo({vitri: ViTri.Tren, phe: Phe.Do, node:instantiate(chotDoMau),  ten: TENQUANCO.CHOT_NAM, loai: LoaiQuan.Chot, hang: 6, cot: 8 })
         ]
     }
 
