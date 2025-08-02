@@ -27,7 +27,8 @@ export enum ViTri{
 }
 
 export interface QuanCo {
-  vitri: ViTri,
+  hoatdong: boolean;
+  vitri: ViTri;
   phe: Phe;
   node: Node;
   ten: string;
@@ -37,6 +38,7 @@ export interface QuanCo {
 }
 
 export interface NuocDi {
+  phe: Phe;
   node: Node;
   hang: number;
   cot: number;

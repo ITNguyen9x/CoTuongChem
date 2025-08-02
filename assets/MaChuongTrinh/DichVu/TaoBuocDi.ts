@@ -17,38 +17,38 @@ export class TaoBuocDi{
         let dsNuocDi : NuocDi[] = [];
         for(let i = quanCo.hang + 1; i <= this.soHangTong; i++){
             let kiemTraBenTren = this.KiemTraOHienTai(i, quanCo.cot, quanCo.phe, dsQuanCo);
-            if( kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, diChuyenMau));
-            // else if(kiemTraBenTren == ViTri.PheDich){
-            //     dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, diChuyenMau));
-            //     break;
-            // }
+            if( kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, quanCo.phe, diChuyenMau));
+            else if(kiemTraBenTren == ViTri.PheDich){
+                dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, quanCo.phe, diChuyenMau));
+                break;
+            }
             else break;
         }
         for(let i = quanCo.cot + 1; i <= this.soCotTong; i++){
             let kiemTraBenPhai = this.KiemTraOHienTai(quanCo.hang, i, quanCo.phe, dsQuanCo);
-            if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, diChuyenMau));
-            // else if(kiemTraBenPhai == ViTri.PheDich){
-            //     dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, diChuyenMau));
-            //     break;
-            // }
+            if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, quanCo.phe, diChuyenMau));
+            else if(kiemTraBenPhai == ViTri.PheDich){
+                dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, quanCo.phe, diChuyenMau));
+                break;
+            }
             else break;
         }
         for(let i = quanCo.hang - 1; i >= 0; i--){
             let kiemTraBenDuoi = this.KiemTraOHienTai(i, quanCo.cot, quanCo.phe, dsQuanCo);
-            if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, diChuyenMau));
-            // else if(kiemTraBenDuoi == ViTri.PheDich){
-            //     dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, diChuyenMau));
-            //     break;
-            // }
+            if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, quanCo.phe, diChuyenMau));
+            else if(kiemTraBenDuoi == ViTri.PheDich){
+                dsNuocDi.push(this.TaoBuocDi(i, quanCo.cot, quanCo.phe, diChuyenMau));
+                break;
+            }
             else break;
         }
         for(let i = quanCo.cot - 1; i >= 0; i--){
             let kiemTraBenTrai = this.KiemTraOHienTai(quanCo.hang, i, quanCo.phe, dsQuanCo);
-            if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, diChuyenMau));
-            // else if(kiemTraBenTrai == ViTri.PheDich){
-            //     dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, diChuyenMau));
-            //     break;
-            // }
+            if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, quanCo.phe, diChuyenMau));
+            else if(kiemTraBenTrai == ViTri.PheDich){
+                dsNuocDi.push(this.TaoBuocDi(quanCo.hang, i, quanCo.phe, diChuyenMau));
+                break;
+            }
             else break;
         }
         return dsNuocDi;
@@ -59,30 +59,30 @@ export class TaoBuocDi{
         let kiemTraBenTren = this.KiemTraOHienTai(quanCo.hang + 1, quanCo.cot, quanCo.phe, dsQuanCo);
         if(kiemTraBenTren == ViTri.Trong){
             let kiemTraTrenPhai = this.KiemTraOHienTai(quanCo.hang + 2, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-            if(kiemTraTrenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot + 1, diChuyenMau));
+            if(kiemTraTrenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot + 1, quanCo.phe, diChuyenMau));
             let kiemTraTrenTrai = this.KiemTraOHienTai(quanCo.hang + 2, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-            if(kiemTraTrenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot - 1, diChuyenMau));
+            if(kiemTraTrenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot - 1, quanCo.phe, diChuyenMau));
         }
         let kiemTraBenPhai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot + 1, quanCo.phe, dsQuanCo);
         if(kiemTraBenPhai == ViTri.Trong){
             let kiemTraPhaiTren = this.KiemTraOHienTai(quanCo.hang + 1, quanCo.cot + 2, quanCo.phe, dsQuanCo);
-            if(kiemTraPhaiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot + 2, diChuyenMau));
+            if(kiemTraPhaiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot + 2, quanCo.phe, diChuyenMau));
             let kiemTraPhaiDuoi = this.KiemTraOHienTai(quanCo.hang - 1, quanCo.cot + 2, quanCo.phe, dsQuanCo);
-            if(kiemTraPhaiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot + 2, diChuyenMau));
+            if(kiemTraPhaiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot + 2, quanCo.phe, diChuyenMau));
         }
         let kiemTraBenDuoi = this.KiemTraOHienTai(quanCo.hang - 1, quanCo.cot, quanCo.phe, dsQuanCo);
         if(kiemTraBenDuoi == ViTri.Trong){
             let kiemTraDuoiPhai = this.KiemTraOHienTai(quanCo.hang - 2, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-            if(kiemTraDuoiPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot + 1, diChuyenMau));
+            if(kiemTraDuoiPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot + 1, quanCo.phe, diChuyenMau));
             let kiemTraDuoiTrai = this.KiemTraOHienTai(quanCo.hang - 2, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-            if(kiemTraDuoiTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot - 1, diChuyenMau));
+            if(kiemTraDuoiTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot - 1, quanCo.phe, diChuyenMau));
         }
         let kiemTraBenTrai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot - 1, quanCo.phe, dsQuanCo);
         if(kiemTraBenTrai == ViTri.Trong){
             let kiemTraTraiDuoi = this.KiemTraOHienTai(quanCo.hang - 1, quanCo.cot - 2, quanCo.phe, dsQuanCo);
-            if(kiemTraTraiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot - 2, diChuyenMau));
+            if(kiemTraTraiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot - 2, quanCo.phe, diChuyenMau));
             let kiemTraTraiTren = this.KiemTraOHienTai(quanCo.hang + 1, quanCo.cot - 2, quanCo.phe, dsQuanCo);
-            if(kiemTraTraiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot - 2, diChuyenMau));
+            if(kiemTraTraiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot - 2, quanCo.phe, diChuyenMau));
         }
         return dsNuocDi;
     }
@@ -92,47 +92,47 @@ export class TaoBuocDi{
         let kiemTraPhaiTren = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang + 1, quanCo.cot + 1, quanCo.phe, dsQuanCo);
         if(kiemTraPhaiTren == ViTri.Trong){
             kiemTraPhaiTren = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang + 2, quanCo.cot + 2, quanCo.phe, dsQuanCo);
-            if(kiemTraPhaiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot + 2, diChuyenMau));
+            if(kiemTraPhaiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot + 2, quanCo.phe, diChuyenMau));
         }
         let kiemTraPhaiDuoi = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang - 1, quanCo.cot + 1, quanCo.phe, dsQuanCo);
         if(kiemTraPhaiDuoi == ViTri.Trong){
             kiemTraPhaiDuoi = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang - 2, quanCo.cot + 2, quanCo.phe, dsQuanCo);
-            if(kiemTraPhaiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot + 2, diChuyenMau));
+            if(kiemTraPhaiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot + 2, quanCo.phe, diChuyenMau));
         }
         let kiemTraTraiDuoi = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang - 1, quanCo.cot - 1, quanCo.phe, dsQuanCo);
         if(kiemTraTraiDuoi == ViTri.Trong){
             kiemTraTraiDuoi = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang - 2, quanCo.cot - 2, quanCo.phe, dsQuanCo);
-            if(kiemTraTraiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot - 2, diChuyenMau));
+            if(kiemTraTraiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 2, quanCo.cot - 2, quanCo.phe, diChuyenMau));
         }
         let kiemTraTraiTren = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang + 1, quanCo.cot - 1, quanCo.phe, dsQuanCo);
         if(kiemTraTraiTren == ViTri.Trong){
             let kiemTraTraiTren = this.KiemTraOTrungHienTai(quanCo.vitri, quanCo.hang + 2, quanCo.cot - 2, quanCo.phe, dsQuanCo);
-            if(kiemTraTraiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot - 2, diChuyenMau));
+            if(kiemTraTraiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 2, quanCo.cot - 2, quanCo.phe, diChuyenMau));
         }
         return dsNuocDi;
     }
     static TaoNuocDiCuaSi(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): NuocDi[]{
         let dsNuocDi : NuocDi[] = [];
         let kiemTraPhaiTren = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang + 1, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-        if(kiemTraPhaiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot + 1, diChuyenMau));
+        if(kiemTraPhaiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot + 1, quanCo.phe, diChuyenMau));
         let kiemTraPhaiDuoi = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang - 1, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-        if(kiemTraPhaiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot + 1, diChuyenMau));
+        if(kiemTraPhaiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot + 1, quanCo.phe, diChuyenMau));
         let kiemTraTraiDuoi = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang - 1, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-        if(kiemTraTraiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot - 1, diChuyenMau));
+        if(kiemTraTraiDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot - 1, quanCo.phe, diChuyenMau));
         let kiemTraTraiTren = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang + 1, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-        if(kiemTraTraiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot - 1, diChuyenMau));
+        if(kiemTraTraiTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot - 1, quanCo.phe, diChuyenMau));
         return dsNuocDi;
     }
     static TaoNuocDiCuaTuong(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): NuocDi[]{
         let dsNuocDi : NuocDi[] = [];
         let kiemTraBenTren = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang + 1, quanCo.cot, quanCo.phe, dsQuanCo);
-        if(kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot, diChuyenMau));
+        if(kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot, quanCo.phe, diChuyenMau));
         let kiemTraBenPhai = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-        if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, diChuyenMau));
+        if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, quanCo.phe, diChuyenMau));
         let kiemTraBenDuoi = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang - 1, quanCo.cot, quanCo.phe, dsQuanCo);
-        if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot, diChuyenMau));
+        if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot, quanCo.phe, diChuyenMau));
         let kiemTraBenTrai = this.KiemTraONhoHienTai(quanCo.vitri, quanCo.hang, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-        if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot -1, diChuyenMau));
+        if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot -1, quanCo.phe, diChuyenMau));
         return dsNuocDi;
     }
 
@@ -140,29 +140,29 @@ export class TaoBuocDi{
         let dsNuocDi: NuocDi[] = [];
         if(quanCo.vitri == ViTri.Duoi){
             let kiemTraBenTren = this.KiemTraOHienTai(quanCo.hang + 1, quanCo.cot, quanCo.phe, dsQuanCo);
-            if(kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot, diChuyenMau));
+            if(kiemTraBenTren == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang + 1, quanCo.cot, quanCo.phe, diChuyenMau));
             if(quanCo.hang > 4){
                 let kiemTraBenPhai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-                if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, diChuyenMau));
+                if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, quanCo.phe, diChuyenMau));
                 let kiemTraBenTrai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-                if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot - 1, diChuyenMau));
+                if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot - 1, quanCo.phe, diChuyenMau));
             }
         }else{
             let kiemTraBenDuoi = this.KiemTraOHienTai(quanCo.hang - 1, quanCo.cot, quanCo.phe, dsQuanCo);
-            if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot, diChuyenMau));
+            if(kiemTraBenDuoi == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang - 1, quanCo.cot, quanCo.phe, diChuyenMau));
             if(quanCo.hang < 5){
                 let kiemTraBenPhai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot + 1, quanCo.phe, dsQuanCo);
-                if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, diChuyenMau));
+                if(kiemTraBenPhai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot + 1, quanCo.phe, diChuyenMau));
                 let kiemTraBenTrai = this.KiemTraOHienTai(quanCo.hang, quanCo.cot - 1, quanCo.phe, dsQuanCo);
-                if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot -1, diChuyenMau));
+                if(kiemTraBenTrai == ViTri.Trong) dsNuocDi.push(this.TaoBuocDi(quanCo.hang, quanCo.cot -1, quanCo.phe, diChuyenMau));
             }
         }
         return dsNuocDi;
     }
 
-    static TaoBuocDi(hang: number, cot: number, diChuyenMau: Prefab): NuocDi{
+    static TaoBuocDi(hang: number, cot: number, phe: Phe, diChuyenMau: Prefab): NuocDi{
         let vitri = HamChung.LayViTri(hang, cot);
-        let nuocDi: NuocDi = {hang: hang, cot: cot, node: instantiate(diChuyenMau)};
+        let nuocDi: NuocDi = {hang: hang, cot: cot, phe: phe, node: instantiate(diChuyenMau)};
         nuocDi.node.setPosition(vitri.x, vitri.y - this.doLechY);
         return nuocDi;
     }

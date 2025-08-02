@@ -1,5 +1,5 @@
-import { _decorator, Component, Node, Prefab, Vec2, Animation, tween, Vec3 } from 'cc';
-import { LoaiQuan, NuocDi, QuanCo } from '../MoHinh/MoHinhQuanCo';
+import { _decorator, Component, Node, Prefab, Vec2, Animation, tween, Vec3, instantiate } from 'cc';
+import { LoaiQuan, NuocDi, Phe, QuanCo, ViTri } from '../MoHinh/MoHinhQuanCo';
 import { TaoQuanCo, } from '../DichVu/TaoQuanCo';
 import { TaoBuocDi, } from '../DichVu/TaoBuocDi';
 import { HamChung } from '../Chung/HamChung';
@@ -7,8 +7,7 @@ const { ccclass, property } = _decorator;
 
 @ccclass('DoiTuongQuanCo')
 export class DoiTuongQuanCo extends Component {
-    @property({type: Node})
-    QuanCo: Node = null!;
+    @property({type: Node}) QuanCo: Node = null!;
 
     @property({type: Prefab}) tuongXanhMau: Prefab = null!;
     @property({type: Prefab}) siXanhMau: Prefab = null!;
@@ -33,6 +32,8 @@ export class DoiTuongQuanCo extends Component {
     isChonQuan : boolean = false;
     dsNuocDi: NuocDi[] = [];
     quanCoChon: QuanCo;
+    soCoDuoiBiAn: number = 0;
+    soCoTrenBiAn: number = 0;
 
     start() { 
         this.TaoDanhSachQuanCo();
@@ -47,6 +48,7 @@ export class DoiTuongQuanCo extends Component {
 
 
     ChonQuan(quanCo: QuanCo) {
+        if(!quanCo.hoatdong) return;
         this.isChonQuan = !this.isChonQuan;
         if(!this.isChonQuan){
             this.NuocDi.destroyAllChildren();
@@ -117,7 +119,7 @@ export class DoiTuongQuanCo extends Component {
 
     DiChuyenTheoAnim(nuocDi: NuocDi) {
         let huongDi: string = 'TuongXanh_Xuong';
-         this.quanCoChon.hang  = nuocDi.hang;
+        this.quanCoChon.hang  = nuocDi.hang;
         this.quanCoChon.cot = nuocDi.cot;
         if(nuocDi.cot> this.quanCoChon.cot) huongDi = 'TuongXanh_Phai'
         else if(nuocDi.cot < this.quanCoChon.cot) huongDi = 'TuongXanh_Trai';
@@ -127,8 +129,36 @@ export class DoiTuongQuanCo extends Component {
         anim?.play(huongDi);
         tween(this.quanCoChon.node).to(0.4, { position: new Vec3(nuocDi.node.x, nuocDi.node.y + 16, 0) }).call(() => { anim?.play("TuongXanh_Doi") }).start();
         this.NuocDi.destroyAllChildren();
+        
+        this.dsQuanCo.map((quanCo: QuanCo) => {
+            if(quanCo.hang == nuocDi.hang && quanCo.cot == nuocDi.cot && quanCo.phe != nuocDi.phe){
+                quanCo.hoatdong = false;
+                let soChenhLechX = 32;
+                if(quanCo.vitri == ViTri.Duoi){
+                    this.soCoDuoiBiAn += 1;
+                    if(this.soCoDuoiBiAn < 10){
+                        quanCo.hang = -1;
+                        quanCo.cot = this.soCoDuoiBiAn - 1;
+                    }else{
+                        quanCo.hang = -2;
+                        quanCo.cot = this.soCoDuoiBiAn - 9;
+                    }  
+                }else if(quanCo.vitri == ViTri.Tren){
+                    this.soCoTrenBiAn += 1;
+                    if(this.soCoTrenBiAn < 10){
+                        quanCo.hang = 10;
+                        quanCo.cot = this.soCoTrenBiAn - 1;
+                    }else{
+                        quanCo.hang = 11;
+                        quanCo.cot = this.soCoTrenBiAn - 9;
+                    }
+                    soChenhLechX = -32;
+                }
+                let vitri = HamChung.LayViTri(quanCo.hang, quanCo.cot);
+                quanCo.node.setPosition(vitri.x, vitri.y - soChenhLechX);
+            }
+        });
     }
     
     daiRongO: number = 64;
-    LayViTri(hang: number, cot: number): Vec2 { return new Vec2((cot - 4) * this.daiRongO, (hang - 4) * this.daiRongO); }
 }
