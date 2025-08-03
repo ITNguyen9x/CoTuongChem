@@ -1,48 +1,53 @@
 import { Node } from 'cc';
 
-export enum Phe{
+export interface QuanCo {
+  quanco_trangthai: boolean;
+  quanco_mau: QuanCo_Mau;
+  quanco_node: Node;
+  quanco_ten: string;
+  quanco_loai: QuanCo_Loai;
+  quanco_hang: number;
+  quanco_cot: number;
+  nguoichoi_vitri: NguoiChoi_ViTri;
+}
+
+export enum QuanCo_Mau{
     Xanh = 0,
     Do = 1
 }
 
-export enum ViTri{
+export enum QuanCo_Loai{
+    Tuong = 0,
+    Si = 1,
+    Bo = 2,
+    Ngua = 3,
+    Xe = 4,
+    Phao = 5,
+    Chot = 6
+}
+
+export enum NguoiChoi_ViTri{
     Tren = 0,
     Duoi = 1
 }
 
-export enum LoaiQuan{
-    Trong = 0,
-    Tuong = 1,
-    Si = 2,
-    Bo = 3,
-    Ngua = 4,
-    Xe = 5,
-    Phao = 6,
-    Chot = 7
+export interface NuocDi {
+  nuocdi_node: Node;
+  nuocdi_hang: number;
+  nuocdi_cot: number;
+  nuocdi_loai: NuocDi_Loai;
+  nguoichoi_vitri: NguoiChoi_ViTri
 }
 
-export enum ViTri{
+export enum NuocDi_Loai{
     Trong = 0,
     GioiHanBien = 1,
     PheTa = 2,
     PheDich = 3
 }
 
-export interface QuanCo {
-  hoatdong: boolean;
-  vitri: ViTri;
-  phe: Phe;
-  node: Node;
-  ten: string;
-  loai: LoaiQuan;
-  hang: number;
-  cot: number;
-}
-
-export interface NuocDi {
-  phe: Phe;
-  node: Node;
-  hang: number;
-  cot: number;
-  loai: ViTri;
+export interface NguoiChoi {
+  nguoichoi_node: Node;
+  nguoichoi_hang: number;
+  nguoichoi_cot: number;
 }
