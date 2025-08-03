@@ -74,7 +74,7 @@
         "__id__": 5
       },
       {
-        "__id__": 7
+        "__id__": 12
       },
       {
         "__id__": 14
@@ -221,66 +221,6 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ds\\NguoiChoi",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "_parent": {
-      "__id__": 2
-    },
-    "_children": [],
-    "_active": true,
-    "_components": [
-      {
-        "__id__": 6
-      }
-    ],
-    "_prefab": null,
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "37Uhz8g1BFOrqewDzSJZoP"
-  },
-  {
-    "__type__": "a90f4sI5OJELZ8jnZfKcka4",
-    "_name": "",
-    "_objFlags": 0,
-    "__editorExtras__": {},
-    "node": {
-      "__id__": 5
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "NguoiChoi": {
-      "__id__": 5
-    },
-    "_id": "05xF5p+RFM7K77ptPDsYnc"
-  },
-  {
-    "__type__": "cc.Node",
     "_name": "BanCo",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -289,7 +229,7 @@
     },
     "_children": [
       {
-        "__id__": 8
+        "__id__": 6
       }
     ],
     "_active": true,
@@ -330,20 +270,20 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
-      "__id__": 7
+      "__id__": 5
     },
     "_children": [
       {
-        "__id__": 9
+        "__id__": 7
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 10
       },
       {
-        "__id__": 13
+        "__id__": 11
       }
     ],
     "_prefab": null,
@@ -382,16 +322,16 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": {
-      "__id__": 8
+      "__id__": 6
     },
     "_children": [],
     "_active": true,
     "_components": [
       {
-        "__id__": 10
+        "__id__": 8
       },
       {
-        "__id__": 11
+        "__id__": 9
       }
     ],
     "_prefab": null,
@@ -430,7 +370,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 9
+      "__id__": 7
     },
     "_enabled": true,
     "__prefab": null,
@@ -452,7 +392,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 9
+      "__id__": 7
     },
     "_enabled": true,
     "__prefab": null,
@@ -474,7 +414,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 8
+      "__id__": 6
     },
     "_enabled": true,
     "__prefab": null,
@@ -496,7 +436,7 @@
     "_objFlags": 0,
     "__editorExtras__": {},
     "node": {
-      "__id__": 8
+      "__id__": 6
     },
     "_enabled": true,
     "__prefab": null,
@@ -507,6 +447,74 @@
     "_enableCulling": true,
     "cleanupImageCache": true,
     "_id": "b1AEUrESxKjK/HDTK1aHzP"
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "dsNguoiChoi",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": {
+      "__id__": 2
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 13
+      }
+    ],
+    "_prefab": null,
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": "37Uhz8g1BFOrqewDzSJZoP"
+  },
+  {
+    "__type__": "a90f4sI5OJELZ8jnZfKcka4",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 12
+    },
+    "_enabled": true,
+    "__prefab": null,
+    "NguoiChoi": {
+      "__id__": 12
+    },
+    "avatarNguoiChoi01": {
+      "__uuid__": "769512f1-8d71-4dbb-9e54-7335a8d3c298@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "avatarNguoiChoi02": {
+      "__uuid__": "f71f108b-bbc0-4077-9c39-89cdfcf34ef7@f9941",
+      "__expectedType__": "cc.SpriteFrame"
+    },
+    "_id": "05xF5p+RFM7K77ptPDsYnc"
   },
   {
     "__type__": "cc.Node",

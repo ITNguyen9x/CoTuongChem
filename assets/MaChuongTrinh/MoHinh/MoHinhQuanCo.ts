@@ -47,7 +47,8 @@ export enum NuocDi_Loai{
 }
 
 export interface NguoiChoi {
-  nguoichoi_node: Node;
+  nguoichoi_ten: string;
   nguoichoi_hang: number;
   nguoichoi_cot: number;
+  nguoichoi_node: Node;
 }
