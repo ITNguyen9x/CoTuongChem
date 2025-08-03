@@ -3,7 +3,7 @@ import { NguoiChoi_ViTri, NuocDi, QuanCo, NuocDi_Loai } from "../MoHinh/MoHinhQu
 import { HamChung } from "../Chung/HamChung";
 export class TaoBuocDi{
 
-    static doLechY: number = 16;
+    static doLechCot: number = 16;
     static soHangTong: number = 9;
     static soCotTong: number = 8;
 
@@ -11,9 +11,9 @@ export class TaoBuocDi{
     static SuKienChonQuan(quanCo: QuanCo, onSelect: (quanCo: QuanCo) => void) { quanCo.quanco_node.on(Node.EventType.TOUCH_START, () => { onSelect(quanCo) })}
 
     static ChonNuocDi(danhSachNuocDi: NuocDi[], onSelect: (nuocDi: NuocDi) => void) { danhSachNuocDi.forEach(ds => this.SuKienChonNuocDi(ds, onSelect)) }
-    static SuKienChonNuocDi(nuocDi: NuocDi, onSelect: (nuocDi: NuocDi) => void) { nuocDi.nuocdi_node.on(Node.EventType.TOUCH_START, () => { onSelect(nuocDi) }) }
+    static SuKienChonNuocDi(nuocDi: NuocDi, onSelect: (nuocDi: NuocDi) => void) { nuocDi.nuocdi_node.on(Node.EventType.TOUCH_START, () => { onSelect(nuocDi) })}
 
-    static TaoNuocDiCuaXe(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): NuocDi[] {
+    static TaoNuocDiCuaXe(quanCo: QuanCo, dsQuanCo: QuanCo[], diChuyenMau: Prefab): NuocDi[]{
         let dsNuocDi : NuocDi[] = [];
         for(let i = quanCo.quanco_hang + 1; i <= this.soHangTong; i++){
             let kiemTraBenTren = this.KiemTraOHienTai(i, quanCo.quanco_cot, quanCo.nguoichoi_vitri, dsQuanCo);
@@ -246,7 +246,7 @@ export class TaoBuocDi{
     static TaoBuocDi(nuocdi_hang: number, nuocdi_cot: number, nguoichoi_vitri: NguoiChoi_ViTri, nuocdi_loai: NuocDi_Loai, diChuyenMau: Prefab): NuocDi{
         let viTriNuocDi = HamChung.LayViTri(nuocdi_hang, nuocdi_cot);
         let nuocDi: NuocDi = {nuocdi_hang: nuocdi_hang, nuocdi_cot: nuocdi_cot, nuocdi_loai: nuocdi_loai, nguoichoi_vitri: nguoichoi_vitri, nuocdi_node: instantiate(diChuyenMau)};
-        nuocDi.nuocdi_node.setPosition(viTriNuocDi.x, viTriNuocDi.y - this.doLechY);
+        nuocDi.nuocdi_node.setPosition(viTriNuocDi.x, viTriNuocDi.y - this.doLechCot);
         return nuocDi;
     }
 
@@ -297,7 +297,7 @@ export class TaoBuocDi{
         return NuocDi_Loai.Trong;
     }
   
-    static GioiHanBanCoNho(hang: number, cot: number, nguoichoi_vitri: NguoiChoi_ViTri): boolean{
+    static GioiHanBanCoNho(o_hang: number, o_cot: number, nguoichoi_vitri: NguoiChoi_ViTri): boolean{
         let hangMin : number = 0;
         let hangMax: number = 2;
         let cotMin: number = 3;
@@ -306,7 +306,7 @@ export class TaoBuocDi{
             hangMin = 7;
             hangMax = 9;
         }
-        if(hang < hangMin || hang > hangMax || cot < cotMin || cot > cotMax) return true;
+        if(o_hang < hangMin || o_hang > hangMax || o_cot < cotMin || o_cot > cotMax) return true;
         return false;
     }
 
