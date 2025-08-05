@@ -1,4 +1,5 @@
 import { _decorator, Component, director, Node } from 'cc';
+import { APIClient } from '../../APIs/APIClient';
 const { ccclass, property } = _decorator;
 
 @ccclass('DangKy')
@@ -19,5 +20,8 @@ export class DangKy extends Component {
     }
     ChuyenTrangQuenMatKhau() {
         director.loadScene("QuenMatKhau");
+    }
+    async DangkyTaiKhoan(){
+        await APIClient.ThemTaiKhoan();
     }
 }
