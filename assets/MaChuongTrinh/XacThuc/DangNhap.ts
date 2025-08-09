@@ -1,5 +1,6 @@
-import { _decorator, Component, director, Node, EditBox } from 'cc';
-import { APIClient } from '../../APIs/APIClient';
+import { _decorator, Component, director, Node, EditBox, Label } from 'cc';
+import { dangNhap } from '../../scripts/apis/apiXacThuc';
+import { isPhoneNumber, isEmail, isPasswordStrong } from '../../scripts/utils/validation';
 const { ccclass, property } = _decorator;
 
 @ccclass('DangNhap')
@@ -9,6 +10,8 @@ export class DangNhap extends Component {
     lblDangKy: Node = null;
     @property(Node)
     lblQuenMatKhau: Node = null;
+    @property(Label)
+    lblThongBao: Label = null;
     @property(EditBox)
     editSoDienThoai: EditBox = null;
     @property(EditBox)
@@ -19,22 +22,17 @@ export class DangNhap extends Component {
         this.lblQuenMatKhau.on(Node.EventType.TOUCH_END, this.ChuyenTrangQuenMatKhau, this);
     }
 
-    ChuyenTrangDangKy() {
-        director.loadScene("DangKy");
-    }
-
-    ChuyenTrangQuenMatKhau() {
-        director.loadScene("QuenMatKhau");
-    }
-
     async DangNhap(){
-        let ketQua = await APIClient.DangNhap(Number(this.editSoDienThoai.string.trim()), this.editMatKhau.string);
-        console.log("ketQua", ketQua)
-        if(ketQua.length > 0) this.ChuyenTrangChoiGame();
+        if (!isPhoneNumber(this.editSoDienThoai.string.trim()) || !isPasswordStrong(this.editMatKhau.string.trim())) 
+            this.lblThongBao.string = "số điện thoại/mật khẩu không đúng định dạng"
+        else{
+            const ketQua = await dangNhap(Number(this.editSoDienThoai.string.trim()), this.editMatKhau.string.trim());
+            this.lblThongBao.string = ketQua.message;
+            if(ketQua.status == 1) this.ChuyenTrangChoiGame();
+        }
     }
 
-    ChuyenTrangChoiGame() {
-        director.loadScene("ChoiGame");
-    }
-
+    ChuyenTrangDangKy() { director.loadScene("DangKy") }
+    ChuyenTrangQuenMatKhau() { director.loadScene("QuenMatKhau") }
+    ChuyenTrangChoiGame() { director.loadScene("ChoiGame") }
 }
