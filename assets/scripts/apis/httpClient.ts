@@ -12,24 +12,39 @@ export async function httpPost(endpoint: string, data: any, token?: string) {
       body: JSON.stringify(data),
       signal: controller.signal,
     });
+
     clearTimeout(timeout);
+
     const jsonRes = await res.json();
+
     if (!res.ok) {
+      // Lấy thông báo lỗi từ server nếu có, hoặc lấy status text
+      const errorMsg = jsonRes?.message || res.statusText || 'Lỗi không xác định';
+      console.error(`API lỗi [${res.status}]:`, errorMsg);
       return {
         status: 0,
-        message: 'Lỗi gọi API: ' + jsonRes
+        message: errorMsg,
       };
     }
+
+    // Thành công
     return {
-        status: 1,
-        message: jsonRes
+      status: 1,
+      message: jsonRes,
     };
-  } catch (err) {
+  } catch (err: any) {
     clearTimeout(timeout);
-    console.error("Lỗi gọi API:", err);
+    if (err.name === 'AbortError') {
+      console.error("Lỗi: Request bị timeout");
       return {
-          status: -1,
-          message: "lỗi"
+        status: -1,
+        message: "Request bị timeout",
       };
+    }
+    console.error("Lỗi gọi API:", err.message || err);
+    return {
+      status: -1,
+      message: "Lỗi gọi API",
+    };
   }
 }
