@@ -1,6 +1,6 @@
 import { _decorator, Component, director, Node, EditBox, Label } from 'cc';
 import { dangNhap } from '../../scripts/apis/apiXacThuc';
-import { isPhoneNumber, isEmail, isPasswordStrong } from '../../scripts/utils/validation';
+import { isPhoneNumber, isPasswordStrong } from '../../scripts/utils/validation';
 const { ccclass, property } = _decorator;
 
 @ccclass('DangNhap')
