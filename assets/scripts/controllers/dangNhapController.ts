@@ -32,10 +32,12 @@ export class dangNhapController extends Component {
             const progressBarController = this.progressBarNode.getComponent(ProgressBarController);
             const ketQua = await dangNhap(Number(this.editSoDienThoai.string.trim()), this.editMatKhau.string.trim());
             this.lblThongBao.string = ketQua.message;
-            if(ketQua.status == 1) await progressBarController.loadSceneWithProgress('Sanh');
+            //if(ketQua.status == 1) await progressBarController.loadSceneWithProgress('Sanh');
+            if(ketQua.status == 1) this.ChuyenTrangSanh();
         }
     }
 
     ChuyenTrangDangKy() { director.loadScene("DangKy") }
     ChuyenTrangQuenMatKhau() { director.loadScene("QuenMatKhau") }
+    ChuyenTrangSanh(){ director.loadScene("Sanh") }
 }
